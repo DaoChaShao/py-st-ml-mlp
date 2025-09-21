@@ -5,6 +5,10 @@
 
 ### Features
 
+- add model training functionality in train.py with dataset splitting and MLP training ([5384973](https://github.com///commit/538497352df34585e5d45dd8f4f8a241d899e446))
+- enhance data preparation functionality in preparation.py with missing value and duplicate row handling ([7d888ac](https://github.com///commit/7d888acf050f21173a09458f1b4c1d6103333c39))
+- update layout.py to add Model Training page and corresponding sidebar navigation ([990ca01](https://github.com///commit/990ca01b25158ea54254cefbe8e5371ddbce8838))
+- add console_catcher function to capture terminal output in helper.py ([f5e6455](https://github.com///commit/f5e64555a8328f25145cbb4138077d6fb399d51d))
 - implement data preparation functionality in preparation.py with dataset loading and visualization ([d95dd25](https://github.com///commit/d95dd2517961aaee0a0c693947b0b29cad16d6d7))
 - update CHANGELOG.md to include recent project features and version history ([fa444eb](https://github.com///commit/fa444eb9992ff795f57c9d17ea87f513c6d2a5ef))
 - add XOR dataset in xor.csv for binary classification tasks ([84ccf24](https://github.com///commit/84ccf2400ec2f682ef081c38c47ec5643a532a60))
@@ -31,4 +35,9 @@
 ### Bug Fixes
 
 - refactor plotting function in helper.py to use match-case for dimension handling and improve data concatenation ([4563ba6](https://github.com///commit/4563ba67c23ca4182c6df2c81626ec392173f8b2))
+
+### Chore
+
+- update dependencies in requirements.txt for compatibility and new features ([5196169](https://github.com///commit/519616916a0526cd34dfb917b8fc71b6951f2f1f))
+- update CHANGELOG.md to reflect recent changes and improvements ([0c5aa3d](https://github.com///commit/0c5aa3d5d2084fc23aaa49d79e0a1cace9d3e9dc))
 
