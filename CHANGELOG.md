@@ -5,6 +5,7 @@
 
 ### Features
 
+- add CHANGELOG.md to document project version history and features ([771033e](https://github.com///commit/771033ea3198e2972bd1866a5377efecec9f15a8))
 - add requirements.txt with essential package dependencies ([2c83a1b](https://github.com///commit/2c83a1b999a9316e779a7a161863c1ed9a12e465))
 - add Chinese README.md with project introduction, data description, and usage instructions ([53d8fd4](https://github.com///commit/53d8fd47213185d5068ff6ea48af171536310451))
 - add README.md with project introduction, data description, and usage instructions ([a19b69c](https://github.com///commit/a19b69c3385160ed12b66d5f7b6adb0d97f02193))
