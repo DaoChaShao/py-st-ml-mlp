@@ -8,19 +8,20 @@
 
 from pandas import DataFrame, read_csv
 from streamlit import (empty, sidebar, subheader, session_state, button,
-                       spinner, rerun)
+                       spinner, rerun, columns, metric)
 
 from utils.helper import Timer, scatter_visualiser
 
 empty_messages: empty = empty()
+nan_col, dup_col = columns(2, gap="small")
 empty_raw_title: empty = empty()
 empty_raw_chart: empty = empty()
 empty_raw_table: empty = empty()
 empty_plot_title: empty = empty()
 empty_plot_chart: empty = empty()
 
-home_sessions: list[str] = ["raw", "hTimer"]
-for session in home_sessions:
+pre_sessions: list[str] = ["raw", "hTimer"]
+for session in pre_sessions:
     session_state.setdefault(session, None)
 
 DATAPATH: str = "data/xor.csv"
@@ -33,11 +34,10 @@ with sidebar:
 
         if button("Load the Raw Dataset", type="primary", width="stretch"):
             with spinner("Loading the raw dataset...", show_time=True, width="stretch"):
-                with Timer("Loading the raw dataset") as t:
+                with Timer("Loading the raw dataset") as session_state["hTimer"]:
                     session_state["raw"] = read_csv(DATAPATH)
                     # print(type(session_state["raw"]))
                     session_state["raw"].drop(session_state["raw"].columns[0], axis=1, inplace=True)
-                    session_state["hTimer"] = t
             rerun()
     else:
         empty_messages.success(
@@ -65,7 +65,29 @@ with sidebar:
         fig = scatter_visualiser(data, categories, 1)
         empty_plot_chart.plotly_chart(fig, use_container_width=True)
 
+        nan = session_state["raw"].isna().sum().sum()
+        dup = session_state["raw"].duplicated().sum()
+        with nan_col:
+            metric("Missing Values", nan, delta=None, delta_color="inverse")
+        with dup_col:
+            metric("Duplicate Rows", dup, delta=None, delta_color="off")
+
+        if nan > 0:
+            if button("Drop Missing Values", type="primary", width="stretch"):
+                with spinner("Dropping missing values...", show_time=True, width="stretch"):
+                    with Timer("Dropping missing values") as timer:
+                        session_state["raw"].dropna(inplace=True)
+                    empty_messages.success(f"{timer} Missing values have been dropped.")
+                rerun()
+        if dup > 0:
+            if button("Drop Duplicate Rows", type="primary", width="stretch"):
+                with spinner("Dropping duplicate rows...", show_time=True, width="stretch"):
+                    with Timer("Dropping duplicate rows") as timer:
+                        session_state["raw"].drop_duplicates(inplace=True)
+                    empty_messages.success(f"{timer} Duplicate rows have been dropped.")
+                rerun()
+
         if button("Clear the Raw Dataset", type="secondary", width="stretch"):
-            for session in home_sessions:
+            for session in pre_sessions:
                 session_state[session] = None
             rerun()
