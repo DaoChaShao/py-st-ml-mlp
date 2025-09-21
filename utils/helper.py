@@ -6,6 +6,7 @@
 # @File     :   helper.py
 # @Desc     :
 
+from io import StringIO
 from numpy import meshgrid, linspace, c_
 from pandas import DataFrame, concat
 from plotly.express import scatter, scatter_3d
@@ -204,3 +205,6 @@ def decision_boundary_adder(fig, model, X: DataFrame, pad_ratio: float = 0.05):
         name="Decision Boundary"
     ))
     return fig
+
+def console_catcher(terminal_output):
+    buffer = StringIO()
