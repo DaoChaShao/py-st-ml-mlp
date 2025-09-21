@@ -5,13 +5,14 @@
 
 ### Features
 
+- implement data preparation functionality in preparation.py with dataset loading and visualization ([d95dd25](https://github.com///commit/d95dd2517961aaee0a0c693947b0b29cad16d6d7))
+- update CHANGELOG.md to include recent project features and version history ([fa444eb](https://github.com///commit/fa444eb9992ff795f57c9d17ea87f513c6d2a5ef))
 - add XOR dataset in xor.csv for binary classification tasks ([84ccf24](https://github.com///commit/84ccf2400ec2f682ef081c38c47ec5643a532a60))
 - integrate page configuration and page setter functions in main.py for streamlined app initialization ([ddaebf0](https://github.com///commit/ddaebf0ab5e52dc8084c31fe2f7835479742d83f))
 - add data visualization and preprocessing functions in helper.py for enhanced data analysis ([e46f237](https://github.com///commit/e46f237aee62da614f2c8bf8c79cedf3bf63b656))
 - add page configuration and sidebar navigation in layout.py for improved user experience ([eae178e](https://github.com///commit/eae178e0249f5eb0787572d1a7ac2c07030a4ba5))
 - add introductory message and expander section in home.py for better navigation ([013cfa3](https://github.com///commit/013cfa334935ef18e49097f9f89c4ed122fa79eb))
 - add application information section in about.py with Streamlit components ([b2db54b](https://github.com///commit/b2db54bc8848a419eb5cecba91894728c17a2482))
-- update CHANGELOG.md to include recent project features and version history ([88cb8f3](https://github.com///commit/88cb8f376c22bfd7bc28a3dc3b71d7672334fd24))
 - add CHANGELOG.md to document project version history and features ([771033e](https://github.com///commit/771033ea3198e2972bd1866a5377efecec9f15a8))
 - add requirements.txt with essential package dependencies ([2c83a1b](https://github.com///commit/2c83a1b999a9316e779a7a161863c1ed9a12e465))
 - add Chinese README.md with project introduction, data description, and usage instructions ([53d8fd4](https://github.com///commit/53d8fd47213185d5068ff6ea48af171536310451))
@@ -26,4 +27,8 @@
 - add __init__.py with main function template ([24c6d5a](https://github.com///commit/24c6d5a36dfba980fc882991879a835ecb114050))
 - add .gitignore to exclude IDE, environment, and system files ([71854d8](https://github.com///commit/71854d8a4b80f1d63354dd8754260a1d2b1b80d2))
 - add .gitignore to exclude IDE and environment files ([1cf3e5b](https://github.com///commit/1cf3e5b0aaeae12f1d95c9732ff4ec7642ec8e5b))
+
+### Bug Fixes
+
+- refactor plotting function in helper.py to use match-case for dimension handling and improve data concatenation ([4563ba6](https://github.com///commit/4563ba67c23ca4182c6df2c81626ec392173f8b2))
 
