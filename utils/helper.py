@@ -7,7 +7,7 @@
 # @Desc     :
 
 from numpy import meshgrid, linspace, c_
-from pandas import DataFrame
+from pandas import DataFrame, concat
 from plotly.express import scatter, scatter_3d
 from plotly.graph_objects import Contour
 from sklearn.compose import ColumnTransformer
@@ -61,64 +61,65 @@ def scatter_visualiser(data: DataFrame, categories: DataFrame = None, dims: int 
     :return: a scatter plot with different colours and symbols for each category
     """
     if categories is not None:
-        df = data.join(categories)
+        df = concat([data, categories], axis=1)
         category_name = categories.columns[0]
     else:
         df = data
         category_name = None
+        print(category_name)
 
-    dimensions = data.shape[1]
+    fig = None
 
-    if dimensions == 2:
-        fig = scatter(
-            df,
-            x=data.columns[0],
-            y=data.columns[1],
-            color=category_name,
-            symbol=category_name,
-            hover_data=[data.columns[0], data.columns[1], category_name]
-        ).update_layout(coloraxis_showscale=False)
-    elif dimensions == 3:
-        fig = scatter_3d(
-            df,
-            x=data.columns[0],
-            y=data.columns[1],
-            z=data.columns[2],
-            color=category_name,
-            symbol=category_name,
-            hover_data=[data.columns[0], data.columns[1], data.columns[2], category_name]
-        ).update_layout(coloraxis_showscale=False)
-    else:
-        pca = PCA(n_components=dims)
-        components = pca.fit_transform(data)
-        if dims == 2:
-            cols: list[str] = ["PAC-X", "PAC-Y"]
-        else:
-            cols: list[str] = ["PAC-X", "PAC-Y", "PAC-Z"]
-        df = DataFrame(components, columns=cols)
-        df = df.join(categories)
-
-        colour_name: str = str(categories.columns[0])
-
-        if dims == 2:
+    match dims:
+        case 1:
+            dimensions = data.shape[1]
+            if dimensions == 2:
+                fig = scatter(
+                    df,
+                    x=data.columns[0],
+                    y=data.columns[1],
+                    color=category_name,
+                    symbol=category_name,
+                    hover_data=[data.columns[0], data.columns[1], category_name]
+                ).update_layout(coloraxis_showscale=False)
+            else:
+                fig = scatter_3d(
+                    df,
+                    x=data.columns[0],
+                    y=data.columns[1],
+                    z=data.columns[2],
+                    color=category_name,
+                    symbol=category_name,
+                    hover_data=[data.columns[0], data.columns[1], data.columns[2], category_name]
+                ).update_layout(coloraxis_showscale=False)
+        case 2:
+            pca = PCA(n_components=2)
+            components = pca.fit_transform(data)
+            df = DataFrame(components, columns=["PAC-X", "PAC-Y"])
             fig = scatter(
                 df,
-                x=cols[0],
-                y=cols[1],
-                color=colour_name,
-                symbol=colour_name,
-                hover_data=cols + ([colour_name] if colour_name else [])
+                x="PAC-X",
+                y="PAC-Y",
+                color=category_name,
+                symbol=category_name,
+                hover_data=["PAC-X", "PAC-Y"] + ([category_name] if category_name else [])
             ).update_layout(coloraxis_showscale=False)
-        else:
+        case 3:
+            pca = PCA(n_components=3)
+            components = pca.fit_transform(data)
+            df = DataFrame(components, columns=["PAC-X", "PAC-Y", "PAC-Z"])
             fig = scatter_3d(
                 df,
-                x=cols[0],
-                y=cols[1],
-                z=cols[2],
-                color=colour_name,
-                symbol=colour_name,
-                hover_data=cols + ([colour_name] if colour_name else [])
+                x="PAC-X",
+                y="PAC-Y",
+                z="PAC-Z",
+                color=category_name,
+                symbol=category_name,
+                hover_data=["PAC-X", "PAC-Y", "PAC-Z"] + ([category_name] if category_name else [])
             ).update_layout(coloraxis_showscale=False)
+        case _:
+            raise ValueError("dims must be 1, 2, or 3")
+
     return fig
 
 
