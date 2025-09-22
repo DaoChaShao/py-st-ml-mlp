@@ -5,6 +5,9 @@
 
 ### Features
 
+- add model compilation preparation for evaluation and retraining ([9ae2b73](https://github.com/DaoChaShao/py-st-ml-mlp/commit/9ae2b730f23c0ed05d83175b21b384a094282a7d))
+- refactor model path handling for consistency in training script ([c60723c](https://github.com/DaoChaShao/py-st-ml-mlp/commit/c60723c9bc1b0a93637a1ff60f8495574b04ce22))
+- implement model testing functionality with performance metrics and visualizations ([b369b3f](https://github.com/DaoChaShao/py-st-ml-mlp/commit/b369b3fc18993670b922fcedf594652c298db51a))
 - enhance training process with metrics visualization and model management ([2e909e3](https://github.com/DaoChaShao/py-st-ml-mlp/commit/2e909e3c1b6501f6093491e0f66a69efad3b8ae2))
 - add initial test.py file with metadata and encoding ([0e6b9da](https://github.com/DaoChaShao/py-st-ml-mlp/commit/0e6b9daa58acf618d0cb1c2322e7abbcb708fefb))
 - add model testing page to layout with corresponding title and icon ([68d9df5](https://github.com/DaoChaShao/py-st-ml-mlp/commit/68d9df5f5a787784770c4fce9b644da989c57d88))
@@ -42,8 +45,13 @@
 
 ### Chore
 
+- update CHANGELOG.md to reflect recent features and improvements ([31fd4af](https://github.com/DaoChaShao/py-st-ml-mlp/commit/31fd4af0e06d250e75e9307d625f5384e3d2ed34))
 - update TensorFlow dependencies for macOS compatibility ([87d81f1](https://github.com/DaoChaShao/py-st-ml-mlp/commit/87d81f13eea9c3d0e648343aeba61e37b512f241))
-- update CHANGELOG.md to reflect recent features and improvements ([4f97759](https://github.com/DaoChaShao/py-st-ml-mlp/commit/4f97759690d6490ea5d611c94ad13cfdacbc25eb))
 - update dependencies in requirements.txt for compatibility and new features ([5196169](https://github.com/DaoChaShao/py-st-ml-mlp/commit/519616916a0526cd34dfb917b8fc71b6951f2f1f))
 - update CHANGELOG.md to reflect recent changes and improvements ([0c5aa3d](https://github.com/DaoChaShao/py-st-ml-mlp/commit/0c5aa3d5d2084fc23aaa49d79e0a1cace9d3e9dc))
+
+### Docs
+
+- update README.zh-CN.md to include project features and functionalities ([ee90dec](https://github.com/DaoChaShao/py-st-ml-mlp/commit/ee90dec9738acd31fafd4b257b789eb208ed1904))
+- update README.md to include project overview and feature list ([edc69fb](https://github.com/DaoChaShao/py-st-ml-mlp/commit/edc69fb7495dc55259fce3308c5247325655c68f))
 
