@@ -52,6 +52,8 @@ model_sessions: list[str] = ["model", "mTimer", "histories"]
 for session in model_sessions:
     session_state.setdefault(session, None)
 
+MODEL_PATH: str = "mlp_model.h5"
+
 with sidebar:
     if session_state["raw"] is None:
         empty_messages.error("Please upload the dataset in the Home page first.")
@@ -212,14 +214,14 @@ with sidebar:
                             label = f"Epoch {last_epoch}: {key.replace("val_", "Val ").capitalize()}"
                             placeholder.metric(label=label, value=f"{value:.4f}")
 
-                model_path: str = "mlp_model.h5"
-                if path.exists(model_path):
-                    empty_messages.info(f"The model file **{model_path}** already exists in the current directory.")
+                if path.exists(MODEL_PATH):
+                    empty_messages.info(
+                        f"The model file **{MODEL_PATH}** already exists in the current directory.")
 
                     if button("Delete the Model", type="secondary", width="stretch"):
                         with spinner("Deleting the model...", show_time=True, width="stretch"):
                             with Timer("Deleting the model") as timer:
-                                remove(model_path)
+                                remove(MODEL_PATH)
 
                                 for placeholder in placeholders.values():
                                     placeholder.empty()
@@ -236,7 +238,7 @@ with sidebar:
                     if button("Save the Model", type="primary", width="stretch"):
                         with spinner("Saving the model...", show_time=True, width="stretch"):
                             with Timer("Saving the model") as timer:
-                                session_state["model"].save(model_path)
+                                session_state["model"].save(MODEL_PATH)
                         empty_messages.success(f"{timer} The model has been saved successfully!")
                         rerun()
 
