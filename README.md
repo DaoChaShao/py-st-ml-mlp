@@ -10,6 +10,10 @@ using the **Exclusive XOR Playground** dataset. The dataset is a classic example
 **non-linearly separable problem**, making it an ideal playground for experimenting with neural networks and
 understanding how MLPs can learn complex decision boundaries.
 
+This project provides a complete machine learning workflow demo using Streamlit and Keras. It covers data preprocessing,
+model training, and testing. Users can upload datasets, handle missing or duplicate values, visualize data
+distributions, and train a Multi-Layer Perceptron (MLP) model for binary classification.
+
 **DATA DESCRIPTION**
 ---
 Dataset Name: [Exclusive XOR Playground](https://www.kaggle.com/datasets/martininf1n1ty/exclusive-xor-dataset)
@@ -25,6 +29,17 @@ Dataset Name: [Exclusive XOR Playground](https://www.kaggle.com/datasets/martini
   kernel-based SVMs.
 + **Notes**: Traditional linear models cannot solve this problem effectively due to the XOR pattern, making it a great
   example for learning the power of hidden layers in MLPs.
+
+**FEATURES**
+---
+
+- **Data Loading & Visualization**: Upload CSV datasets and view them in tables and scatter plots.
+- **Data Cleaning**: Automatically detect missing values and duplicate rows, with options to clean them.
+- **Data Splitting**: Split datasets into training and testing sets with customizable test size and random seed.
+- **Model Training**: Build and train an MLP model with configurable batch size and epochs.
+- **Training Monitoring**: Track loss, accuracy, precision, recall, and AUC metrics in real-time.
+- **Model Testing**: Predict using the trained model and display accuracy, R², MSE, MAE, and ROC curve.
+- **Decision Boundary Visualization**: Dynamically show the decision boundary on scatter plots.
 
 **WEB DEVELOPMENT**
 ---
