@@ -13,4 +13,7 @@ empty_message.info("Please check the details at the different pages of core func
 
 title("ML - Make Moons")
 with expander("**INTRODUCTION**", expanded=True):
-    caption("+")
+    caption("+ Machine Learning Workflow Demo using Streamlit and Keras")
+    caption("+ Supports data upload, visualization, and cleaning operations")
+    caption("+ Interactive interface to train MLP models and monitor metrics in real-time")
+    caption("+ Supports model testing and decision boundary visualization")
