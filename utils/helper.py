@@ -6,17 +6,19 @@
 # @File     :   helper.py
 # @Desc     :
 
-from io import StringIO
+
 from numpy import meshgrid, linspace, c_
 from pandas import DataFrame, concat
 from plotly.express import scatter, scatter_3d
-from plotly.graph_objects import Contour
+from plotly.graph_objects import Contour, Figure, Scatter
 from sklearn.compose import ColumnTransformer
 from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from tensorflow.keras.callbacks import Callback
 from time import perf_counter
+from typing import override
 
 
 class Timer(object):
@@ -206,5 +208,31 @@ def decision_boundary_adder(fig, model, X: DataFrame, pad_ratio: float = 0.05):
     ))
     return fig
 
-def console_catcher(terminal_output):
-    buffer = StringIO()
+
+class TFKerasLogger(Callback):
+    def __init__(self, num_placeholders: dict = None):
+        super().__init__()
+        # The key name must match the callback logs
+        self._history = {k: [] for k in [
+            "loss", "accuracy", "precision", "recall", "auc",
+            "val_loss", "val_accuracy", "val_precision", "val_recall", "val_auc"
+        ]}
+        self._placeholders = num_placeholders
+
+    @override
+    def on_epoch_end(self, epoch, logs=None):
+        logs = logs or {}
+        # Save the training history per epoch
+        for key in self._history.keys():
+            self._history[key].append(logs.get(key, None))
+        # Update the placeholders with the latest metrics
+        if self._placeholders:
+            for key, placeholder in self._placeholders.items():
+                if key in logs and placeholder is not None:
+                    placeholder.metric(
+                        label=f"Epoch {epoch + 1}: {key.replace("val_", "Valid ").capitalize()}",
+                        value=f"{logs[key]:.4f}"
+                    )
+
+    def get_history(self):
+        return self._history
