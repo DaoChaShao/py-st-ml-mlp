@@ -14,6 +14,7 @@ from sklearn.metrics import accuracy_score, r2_score, roc_curve, auc, mean_squar
 from streamlit import (empty, sidebar, subheader, session_state, button,
                        spinner, rerun, columns, metric)
 from subpages.train import MODEL_PATH
+from tensorflow.keras import metrics
 from tensorflow.keras.models import load_model
 
 from utils.helper import Timer, scatter_visualiser, decision_boundary_adder
@@ -68,6 +69,19 @@ with sidebar:
                         with spinner("Testing the model...", show_time=True, width="stretch"):
                             with Timer("Testing the model") as session_state["vTimer"]:
                                 session_state["mlp"] = load_model(MODEL_PATH)
+
+                                # Need to compile the model before evaluating or retraining the model
+                                # session_state["mlp"].compile(
+                                #     loss="binary_crossentropy",
+                                #     optimizer="adam",
+                                #     metrics=[
+                                #         "accuracy",
+                                #         metrics.Precision(name="precision"),
+                                #         metrics.Recall(name="recall"),
+                                #         metrics.AUC(name="auc"),
+                                #     ],
+                                # )
+
                                 session_state["Y_Pred"] = session_state["mlp"].predict(session_state["X_Test"])
                         rerun()
                 else:
