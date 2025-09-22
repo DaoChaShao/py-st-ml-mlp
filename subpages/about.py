@@ -10,4 +10,8 @@ from streamlit import title, expander, caption
 
 title("**Application Information**")
 with expander("About this application", expanded=True):
-    caption("-")
+    caption("- Built with Python, Streamlit, and Keras")
+    caption("- Data preprocessing includes handling missing values, scaling, and encoding")
+    caption("- Training module provides batch size and epochs configuration")
+    caption("- Visualization module displays scatter plots, tables, ROC curves, and decision boundaries")
+    caption("- Suitable for educational demos and beginner ML experiments")
